@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}'s Playlists</title>
+    <link href="static/styles/style.css" rel="stylesheet"/></head>
+<body>
+    <header>
+        <h1>{{ title }}'s Playlists</h1>
+    </header>
+
+    <section>
+        <h2>Sort Your Liked Songs</h2>
+        <form action="{{ url_for('get_playlist') }}" method="POST">
+            <label for="sort-method">Sort By:</label>
+            <select name="sort_method" id="sort-method">
+                <option value="genre">Genre</option>
+                <option value="mood">Mood</option>
+                <option value="energy">Energy Level</option>
+                <option value="popularity">Popularity</option>
+            </select>
+
+            <button type="submit">Sort Songs</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>Your Playlists</h2>
+        <div class="playlists">
+            <h1>Your sorted playlists:</h1>
+
+            <div id="playlists">
+                {% for song in sorted_songs %}
+                <div class="playlist-item">
+                    <h3>{{ song['name'] }} by {{ song['artist'] }}</h3>
+                    <iframe src="https://open.spotify.com/embed/track/{{ song['id'] }}" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Powered by Spotify API</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Song Recommendations</title>
+</head>
+<body>
+    <h1>Find Similar Songs</h1>
+    <form method="post">
+        <label for="song_name">Enter a song name:</label>
+        <input type="text" id="song_name" name="song_name" required>
+        <button type="submit">Get Recommendations</button>
+    </form>
+
+    {% if recommendations %}
+    <h2>Recommended Songs</h2>
+    <select>
+        {% for track in recommendations %}
+        <option>{{ track['name'] }} - {{ track['artists'][0]['name'] }}</option>
+        {% endfor %}
+    </select>
+    {% endif %}
+</body>
+</html>
